@@ -27,6 +27,7 @@ public class OrderService {
         this.orderMapper = orderMapper;
     }
 
+    @Transactional
     public OrderDto save(OrderDto orderDto) {
         Order entity = orderMapper.toEntity(orderDto);
         return orderMapper.toDto(repository.save(entity));

@@ -1,9 +1,19 @@
 package com.example.dto;
 
-import com.example.bean.Article;
+import com.example.annotation.CheckDate;
+import com.example.annotation.CheckEmail;
+import com.example.bean.Dish;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.Date;
+import java.util.List;
+
+@Getter
+@Setter
 public class OrderDto extends AbstractDto<Integer> {
     @Max(Integer.MAX_VALUE)
     private Integer id;
@@ -13,48 +23,11 @@ public class OrderDto extends AbstractDto<Integer> {
     private String orderStatut;
     @Size(max = 255)
     private String clientName;
-    private Article articles;
+    @CheckEmail(message = "Email is not valid")
+    private String clientEmail;
 
-    public OrderDto() {
-    }
+    @CheckDate(message = "Date is not valid")
+    private Date clientBirthDate;
+    private List<Dish> dishes;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setOrderNumber(Integer orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
-    public Integer getOrderNumber() {
-        return this.orderNumber;
-    }
-
-    public void setOrderStatut(String orderStatut) {
-        this.orderStatut = orderStatut;
-    }
-
-    public String getOrderStatut() {
-        return this.orderStatut;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public String getClientName() {
-        return this.clientName;
-    }
-
-    public void setArticles(Article articles) {
-        this.articles = articles;
-    }
-
-    public Article getArticles() {
-        return this.articles;
-    }
 }
